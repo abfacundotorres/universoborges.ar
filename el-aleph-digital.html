@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Aleph Digital — Cortometraje de Animación | Universo Borges</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Cinzel:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a08;
+      --bg2: #111110;
+      --gold: #c9a84c;
+      --gold-light: #e8c878;
+      --cream: #f0e6d3;
+      --cream-dim: #b8a99a;
+      --white: #faf7f2;
+      --border: rgba(201,168,76,0.18);
+      --nav-h: 72px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--cream); font-family: 'Cormorant Garamond', Georgia, serif; font-size: 18px; line-height: 1.7; overflow-x: hidden; }
+
+    nav { position: fixed; top: 0; left: 0; right: 0; height: var(--nav-h); z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; background: rgba(10,10,8,0.92); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+    .nav-logo { font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--gold); text-decoration: none; letter-spacing: 0.12em; text-transform: uppercase; }
+    .nav-links { display: flex; gap: 0; list-style: none; align-items: center; }
+    .nav-links > li { position: relative; }
+    .nav-links a { color: var(--cream-dim); text-decoration: none; font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 300; letter-spacing: 0.08em; text-transform: uppercase; padding: 8px 16px; display: block; transition: color 0.2s; }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links li:hover > .dropdown { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .dropdown { position: absolute; top: 100%; left: 0; background: rgba(12,12,10,0.97); border: 1px solid var(--border); min-width: 200px; opacity: 0; pointer-events: none; transform: translateY(-6px); transition: all 0.2s; }
+    .dropdown a { padding: 10px 20px; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.73rem; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { display: block; width: 24px; height: 1px; background: var(--gold); }
+
+    .page-hero {
+      padding: calc(var(--nav-h) + 80px) 80px 80px;
+      min-height: 55vh;
+      display: flex;
+      align-items: flex-end;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero-bg {
+      position: absolute; inset: 0;
+      background-image: url('img/3-Yleybxo6WaIvx57X.jpg');
+      background-size: cover; background-position: center top;
+      filter: brightness(0.25) saturate(0.5);
+    }
+    .page-hero-overlay { position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 40%, var(--bg) 100%); }
+    .page-hero-content { position: relative; z-index: 2; }
+    .page-eyebrow { font-family: 'Inter', sans-serif; font-size: 0.7rem; letter-spacing: 0.28em; color: var(--gold); text-transform: uppercase; margin-bottom: 16px; }
+    .page-title { font-family: 'Cinzel', serif; font-size: clamp(2.5rem, 5vw, 4.5rem); font-weight: 400; color: var(--white); line-height: 1.05; }
+
+    .section { padding: 80px; }
+    .section-dark { background: var(--bg2); }
+
+    .video-block {
+      margin-bottom: 64px;
+    }
+    .video-label {
+      font-family: 'Cinzel', serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+    .video-frame {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: #111;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .video-frame iframe {
+      width: 100%; height: 100%; border: none; display: block;
+    }
+    .video-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+      background: linear-gradient(135deg, #111 0%, #0a0a08 100%);
+    }
+    .video-placeholder p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      color: var(--cream-dim);
+      font-size: 1.1rem;
+    }
+
+    footer { background: #060605; border-top: 1px solid var(--border); padding: 48px 80px; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 60px; margin-bottom: 40px; }
+    .footer-brand h3 { font-family: 'Cinzel', serif; font-size: 1.05rem; color: var(--gold); letter-spacing: 0.12em; margin-bottom: 12px; }
+    .footer-brand p { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 300; color: var(--cream-dim); line-height: 1.7; }
+    .footer-col h4 { font-family: 'Inter', sans-serif; font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: 8px; }
+    .footer-col ul li a { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 300; color: var(--cream-dim); text-decoration: none; }
+    .footer-col ul li a:hover { color: var(--gold-light); }
+    .footer-contact p { font-family: 'Inter', sans-serif; font-size: 0.8rem; font-weight: 300; color: var(--cream-dim); line-height: 1.8; }
+    .footer-contact a { color: var(--gold); text-decoration: none; }
+    .footer-bottom { border-top: 1px solid var(--border); padding-top: 24px; }
+    .footer-bottom p { font-family: 'Inter', sans-serif; font-size: 0.7rem; font-weight: 300; color: #555; }
+    .footer-donation { background: rgba(201,168,76,0.06); border: 1px solid var(--border); padding: 24px 32px; margin-bottom: 40px; text-align: center; }
+    .footer-donation p { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--cream-dim); margin-bottom: 6px; }
+    .footer-donation a { font-family: 'Inter', sans-serif; font-size: 0.73rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); text-decoration: none; border: 1px solid var(--border); padding: 7px 22px; display: inline-block; margin-top: 10px; }
+    .footer-donation a:hover { background: var(--gold); color: var(--bg); }
+
+    @media (max-width: 900px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .nav-links.open { display: flex; flex-direction: column; position: fixed; top: var(--nav-h); left: 0; right: 0; background: rgba(10,10,8,0.98); padding: 20px 0; border-bottom: 1px solid var(--border); }
+      .hamburger { display: flex; }
+      .page-hero { padding: 120px 24px 60px; }
+      .section { padding: 60px 24px; }
+      .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+      footer { padding: 40px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">Universo Borges</a>
+    <ul class="nav-links" id="nav-links">
+      <li><a href="index.html">Inicio</a></li>
+      <li><a href="el-aleph-digital.html">El Aleph Digital</a></li>
+      <li><a href="documental.html">Documental ▾</a>
+        <ul class="dropdown">
+          <li><a href="balderston.html">Balderston</a></li>
+          <li><a href="fishburn.html">Fishburn</a></li>
+          <li><a href="echeverria.html">Echeverría</a></li>
+        </ul>
+      </li>
+      <li><a href="docentes.html">Docentes ▾</a>
+        <ul class="dropdown"><li><a href="clases.html">Clases</a></li></ul>
+      </li>
+      <li><a href="ciudad-inteligente.html">Ciudad Inteligente ▾</a>
+        <ul class="dropdown"><li><a href="curso-rapido-ia.html">Curso rápido de IA</a></li></ul>
+      </li>
+      <li><a href="acerca-de-mi.html">Acerca de mí ▾</a>
+        <ul class="dropdown"><li><a href="arte-plastico.html">Arte Plástico</a></li></ul>
+      </li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <section class="page-hero">
+    <div class="page-hero-bg"></div>
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <p class="page-eyebrow">Cortometraje de Animación con IA</p>
+      <h1 class="page-title">El Aleph Digital</h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="video-block">
+      <p class="video-label">Parte I</p>
+      <div class="video-frame">
+        <iframe
+          src="https://player.vimeo.com/video/999216866?h=5ea05aa07b"
+          title="El Aleph Digital — Parte I"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+    <div class="video-block">
+      <p class="video-label">Parte II</p>
+      <div class="video-frame">
+        <iframe
+          src="https://player.vimeo.com/video/999215328?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
+          title="EL ALEPH DIGITAL FINAL 2 04JUL24"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+    <div class="video-block">
+      <p class="video-label">Parte III</p>
+      <div class="video-frame">
+        <iframe
+          src="https://player.vimeo.com/video/999216253?title=0&byline=0&portrait=0&badge=0&autopause=0&player_id=0&app_id=58479"
+          title="EL ALEPH DIGITAL FINAL 3 13JUL24"
+          frameborder="0"
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-donation">
+      <p>Te invito a apoyar el mantenimiento y desarrollo de este proyecto.</p>
+      <p>¡Cada aporte, por pequeño que sea, hace la diferencia!</p>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:16px;">
+        <a href="https://cafecito.app/facundotorres21" rel="noopener" target="_blank" style="display:inline-block;line-height:0;border:0;outline:0;text-decoration:none;">
+          <img srcset="https://cdn.cafecito.app/imgs/buttons/button_6.png 1x, https://cdn.cafecito.app/imgs/buttons/button_6_2x.png 2x, https://cdn.cafecito.app/imgs/buttons/button_6_3.75x.png 3.75x" src="https://cdn.cafecito.app/imgs/buttons/button_6.png" alt="Invitame un café en cafecito.app" style="height:40px;display:block;border:0;outline:0;">
+        </a>
+        <form action="https://www.paypal.com/donate" method="post" target="_top" style="margin:0;padding:0;display:inline-block;">
+          <input type="hidden" name="hosted_button_id" value="6ZPLVBTRC5QYS">
+          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="Donate with PayPal" style="height:40px;display:block;border:0;outline:0;cursor:pointer;">
+          <img alt="" border="0" src="https://www.paypal.com/en_AR/i/scr/pixel.gif" width="1" height="1">
+        </form>
+      </div>
+    </div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <h3>Universo Borges</h3>
+        <p>Proyecto de Inteligencia Artificial homenaje a la obra de Jorge Luis Borges. Facundo Torres, 2026.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegación</h4>
+        <ul>
+          <li><a href="el-aleph-digital.html">El Aleph Digital</a></li>
+          <li><a href="documental.html">Documental</a></li>
+          <li><a href="docentes.html">Docentes</a></li>
+          <li><a href="ciudad-inteligente.html">Ciudad Inteligente</a></li>
+          <li><a href="acerca-de-mi.html">Acerca de mí</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contacto</h4>
+        <p>
+          <span style="color:var(--gold);">facundotorresarte@gmail.com</span><br>
+          <a href="tel:+5493525502495" style="color:var(--gold);text-decoration:none;">+549 3525 502495</a><br>
+          <a href="https://instagram.com/facundotorresarte" target="_blank" style="color:var(--gold);text-decoration:none;">@facundotorresarte</a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Universo Borges — Facundo Torre
